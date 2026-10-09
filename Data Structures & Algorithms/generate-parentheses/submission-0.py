@@ -1,0 +1,21 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        res = []
+        cur = []
+
+        def backtrack(left, right):
+            if left == right == n:
+                res.append(''.join(cur))
+
+            if left < n:
+                cur.append('(')
+                backtrack(left + 1, right)
+                cur.pop()
+            
+            if right < left:
+                cur.append(')')
+                backtrack(left, right + 1)
+                cur.pop()
+        
+        backtrack(0, 0)
+        return res
